@@ -1,0 +1,7 @@
+Este es un ejemplo, 
+
+
+Blog
+    Authors
+    Categories
+        Posts
