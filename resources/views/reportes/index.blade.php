@@ -29,6 +29,8 @@
                             <th>ID</th>
                             <th>Titulo</th>
                             <th>Contenido</th>
+                            <th>Autor</th>
+                            <th>Categoria</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -37,6 +39,8 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->body }}</td>
+                                <td>{{ $post->autor}}</td>
+                                <td>{{ $post->cat}}</td>
                             </tr>
                         @endforeach
                     </tbody>

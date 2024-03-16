@@ -12,8 +12,19 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::get();
-        return view('reportes.index',['posts'=>$posts]);
+        //Relacion de tablas usando inner
+        $data = Post::select(
+            'posts.id',
+            'posts.title',
+            'posts.body',
+            'authors.name as autor',
+            'categories.name as cat'
+        )
+            ->join('authors', 'posts.author_id', '=', 'authors.id')
+            ->join('categories', 'posts.category_id', '=', 'categories.id')
+            ->get();
+
+        return view('reportes.index', ['posts' => $data]);
     }
 
     /**
