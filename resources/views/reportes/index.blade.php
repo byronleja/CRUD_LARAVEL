@@ -7,6 +7,15 @@
 @endsection
 
 @section('mi_contenido')
+
+
+{{--     @foreach ($posts as $post)
+        <pre>
+{{ $post }}
+</pre>
+    @endforeach --}}
+
+    
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
@@ -39,8 +48,8 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->body }}</td>
-                                <td>{{ $post->autor}}</td>
-                                <td>{{ $post->cat}}</td>
+                                <td>{{ $post->autor }}</td>
+                                <td>{{ $post->category }}</td>
                             </tr>
                         @endforeach
                     </tbody>

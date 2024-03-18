@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use DB;
 
 class PostController extends Controller
 {
@@ -12,17 +14,36 @@ class PostController extends Controller
      */
     public function index()
     {
-        //Relacion de tablas usando inner
-        $data = Post::select(
+        /**
+         * SELECT p.id, p.`title`, p.`body`, a.`name` AS author_name, c.`name` AS category FROM posts AS p
+         * INNER JOIN `authors` AS a ON a.`id` = p.`author_id`
+         * INNER JOIN `categories` AS c ON c.`id` = p.`category_id`
+         */
+
+        //Relacion de tablas usando inner join
+       $data = Post::select(
             'posts.id',
             'posts.title',
             'posts.body',
-            'authors.name as autor',
-            'categories.name as cat'
+            'a.name as autor',
+            'c.name as cat'
         )
-            ->join('authors', 'posts.author_id', '=', 'authors.id')
-            ->join('categories', 'posts.category_id', '=', 'categories.id')
+            ->join('authors as a', 'posts.author_id', '=', 'a.id')
+            ->join('categories as c', 'posts.category_id', '=', 'c.id')
             ->get();
+
+        //Relacion de tablas usando with
+        
+        //$data = Post::with(['autor','category'])->get();
+
+        // Otra forma
+       /* $data = DB::select("SELECT p.id, p.`title`, p.`body`, a.`name` AS autor, c.`name` AS category 
+        FROM posts AS p 
+        INNER JOIN `authors` AS a ON a.`id` = p.`author_id` 
+        INNER JOIN `categories` AS c ON c.`id` = p.`category_id`");
+        */
+
+      //  $data = Author::with('post')->get();
 
         return view('reportes.index', ['posts' => $data]);
     }

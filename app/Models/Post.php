@@ -8,8 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-
-    public function author(){
-        return $this->hasMany(Author::class);
+    
+    public function autor(){
+        return $this->hasOne(Author::class,'id','author_id')->select('id','name');
     }
+
+    public function category(){
+        return $this->hasOne(Category::class,'id','category_id')->select('id','name');
+    }
+    
 }
